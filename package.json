@@ -1,0 +1,29 @@
+{
+  "name": "opencode-plugin-react-router-source",
+  "version": "0.1.0",
+  "description": "OpenCode plugin that bundles a React Router source research skill and grants access to its local source cache.",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": "./src/index.js",
+  "bin": {
+    "opencode-plugin-react-router-source": "./bin/opencode-plugin-react-router-source.js"
+  },
+  "files": [
+    "bin/",
+    "skills/",
+    "src/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/third774/opencode-plugin-react-router-source.git"
+  },
+  "bugs": {
+    "url": "https://github.com/third774/opencode-plugin-react-router-source/issues"
+  },
+  "homepage": "https://github.com/third774/opencode-plugin-react-router-source#readme",
+  "license": "MIT"
+}
