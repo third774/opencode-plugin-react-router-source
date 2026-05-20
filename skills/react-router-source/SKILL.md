@@ -37,7 +37,7 @@ The compat package lives in the v6 repo. For any question about `react-router-do
    git -C "$SOURCE_ROOT/react-router-v6" describe --tags --always && git -C "$SOURCE_ROOT/react-router-v6" branch --show-current
    ```
 
-4. Search the local source first. Prefer `Grep`, `Glob`, and direct file reads. Use `sg` for syntax-aware searches when matching code structure.
+4. Search the local source first. Prefer `Grep`, `Glob`, and direct file reads. Use `sg` for syntax-aware searches when matching code structure. Scope every file search to the smallest React Router source directory that can answer the question.
 5. Read the implementation and the nearest tests/docs before answering. Tests often encode important edge cases.
 6. Answer with the observed behavior, version differences, and file references.
 
@@ -78,12 +78,20 @@ If the local v6 clone is on a later branch/tag than the user expects, call that 
 
 - React components: `<v6-source>/packages/react-router/lib/components.tsx`
 - Hooks: `<v6-source>/packages/react-router/lib/hooks.tsx`
-- Router internals: `<v6-source>/packages/react-router/lib/router/`
+- Router internals: `<v6-source>/packages/router/`
 - DOM integration: `<v6-source>/packages/react-router/lib/dom/`
 - DOM package exports: `<v6-source>/packages/react-router-dom/index.tsx`
 - Compat package: `<v6-source>/packages/react-router-dom-v5-compat/`
 - Compat docs: `<v6-source>/packages/react-router-dom-v5-compat/README.md`
 - Tests: `<v6-source>/packages/*/__tests__/`
+
+## Search Tool Safety
+
+- For `Glob`, set `path` to the smallest source directory and use a relative `pattern`. Do not use an absolute pattern with `path: "/"`; that can scan the whole filesystem and produce noisy permission errors.
+- Good `Glob` shape: `path: "$SOURCE_ROOT/react-router-v6/packages/router"`, `pattern: "**/*.ts"`.
+- Bad `Glob` shape: `path: "/"`, `pattern: "$SOURCE_ROOT/react-router-v6/packages/router/*.ts"`.
+- If you already know the exact file or directory, use `Read` instead of `Glob`.
+- For cross-package text searches, prefer `Grep` scoped to the relevant package directory. Use shell `rg` only when you need counts, context flags, or multiple roots that the tool interface cannot express cleanly.
 
 ## Answer Format
 
